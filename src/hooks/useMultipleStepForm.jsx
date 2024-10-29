@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react';
 
 const useMultiStepForm = () => {
-
+  
   const initialFormData = {
-    step1Data: {name: '' , surname: ''},
-    step2Data: {age: '' , gender: ''},
-    step3Data: {companyName: "" , companyCode: ''}
+    step1Data: { name: '', surname: '' },
+    step2Data: { age: '', gender: '' },
+    step3Data: { companyName: '', companyCode: '' },
   };
 
-  const [formData, setFormData] = useState(initialFormData);
-  const [step, setStep] = useState(1);
+  const savedData = JSON.parse(localStorage.getItem('formData'));
+  const savedStep = JSON.parse(localStorage.getItem('step'))
 
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('formData'));
-    const savedStep = JSON.parse(localStorage.getItem('step'));
-    if (savedData) setFormData(savedData);
-    if (savedStep) setStep(savedStep);
-
-    console.log(savedData);
-  }, []);
+  const [formData, setFormData] = useState(savedData || initialFormData);
+  const [step , setStep] = useState(savedStep || 1);
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
@@ -26,7 +20,6 @@ const useMultiStepForm = () => {
   }, [formData, step]);
 
   const updateFormData = (stepKey, field, value) => {
-
     setFormData((prev) => ({
       ...prev,
       [stepKey]: {
@@ -34,15 +27,10 @@ const useMultiStepForm = () => {
         [field]: value,
       },
     }));
-
-    console.log(updateFormData.value);
   };
-      console.log('Saved data' , formData);
 
-
-  const nextStep = () => setStep((prev) => prev < 3 ? prev + 1 : prev);
-  const prevStep = () => setStep((prev) => prev > 1 ? prev - 1 : prev);
-
+  const nextStep = () => setStep((prev) => (prev < 3 ? prev + 1 : prev));
+  const prevStep = () => setStep((prev) => (prev > 1 ? prev - 1 : prev));
 
   return { formData, updateFormData, step, setStep, nextStep, prevStep };
 };
