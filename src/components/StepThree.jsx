@@ -1,8 +1,8 @@
 import React from 'react'
 import useMultiStepForm from '../hooks/useMultipleStepForm';
 
-const StepThree = () => {
-    const {formData , updateFormData} = useMultiStepForm();
+const StepThree = ({formData , updateFormData}) => {
+    //const {formData , updateFormData} = useMultiStepForm();
 
     const handleSubmit = (e) => {
         e.preventDefault();

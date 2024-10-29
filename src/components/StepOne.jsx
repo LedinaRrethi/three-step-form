@@ -1,8 +1,8 @@
 import React from 'react';
 import useMultiStepForm from '../hooks/useMultipleStepForm';
 
-const StepOne = () => {
-  const { formData, updateFormData } = useMultiStepForm();
+const StepOne = ({formData , updateFormData}) => {
+  //const { formData, updateFormData } = useMultiStepForm();
   console.log(formData);
 
   return (
