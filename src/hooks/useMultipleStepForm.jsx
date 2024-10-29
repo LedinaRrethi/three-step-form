@@ -29,10 +29,12 @@ const useMultiStepForm = () => {
     }));
   };
 
+  const resetFormData = () => setFormData(initialFormData);
+
   const nextStep = () => setStep((prev) => (prev < 3 ? prev + 1 : prev));
   const prevStep = () => setStep((prev) => (prev > 1 ? prev - 1 : prev));
 
-  return { formData, updateFormData, step, setStep, nextStep, prevStep };
+  return { initialFormData , formData, updateFormData, resetFormData, step, setStep, nextStep, prevStep };
 };
 
 export default useMultiStepForm;
