@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import MultiStepForm from './components/MultiStepForm';
 
 function App() {
   return (
     <div className="App">
-      <h1>Custom Hook</h1>
+      <MultiStepForm/>
     </div>
   );
 }
