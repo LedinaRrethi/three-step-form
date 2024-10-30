@@ -34,16 +34,21 @@ const useMultiStepForm = () => {
   // }, [formData, step]);
 
   const updateFormData = (stepKey, field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [stepKey]: {
-        ...prev[stepKey],
-        [field]: value,
-      },
-    }));
+    setFormData((prev) => {
+        const updatedFormData = {
+          ...prev,
+          [stepKey]: {
+            ...prev[stepKey],
+            [field]: value,
+          },
+        };
 
-    localStorage.setItem('formData', JSON.stringify(formData));
-    localStorage.setItem('step', JSON.stringify(step));
+        //localStorage.setItem('formData', JSON.stringify(formData));
+        localStorage.setItem('formData', JSON.stringify(updatedFormData));
+        localStorage.setItem('step', JSON.stringify(step));
+
+        return updatedFormData;
+    })
   };
 
   const resetFormData = () => {
